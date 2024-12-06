@@ -1,0 +1,12 @@
+# .gitignore
+__pycache__/
+*.pyc
+.env
+.venv/
+.vscode/
+.idea/
+*.log
+posts_df.csv
+views_df.csv
+likes_df.csv
+ratings_df.csv
