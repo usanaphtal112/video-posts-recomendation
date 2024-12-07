@@ -1,10 +1,63 @@
-# Recommendation System
+# Video Recommendation System
 
-This repository implements a recommendation system that generates personalized video recommendations based on user preferences and post interactions. Below is an explanation of how the code is structured, how to use it, and how to evaluate the system's performance.
+This repository implements shows a video recommendation system built using Python, Flask, and machine learning techniques. The system generates personalized video recommendations by combining content-based and collaborative filtering approaches.
 
 ---
 
+## Features
+
+- Hybrid recommendation algorithm
+- Content-based similarity using TF-IDF(Term Frequency-Inverse Document Frequency) 
+- Collaborative filtering with matrix factorization
+- Flask API for recommendation retrieval
+- Performance metrics evaluation
+
+## Prerequisites
+
+- Python 3.9+
+- pip (Python package manager)
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/usanaphtal112/video-posts-recomendation
+cd video-posts-recomendation
+```
+
+2. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Set up environment variables:
+- Create a `.env` file in the project root
+- Add your API token:
+```
+FLIC_TOKEN=flic_api_token_here
+```
+
 ## Project Structure
+
+```
+video-recommendation/
+│
+├── config.py           # Configuration settings
+├── app.py              # Flask application
+├── utils/
+│   ├── api_helpers.py  # API interaction utilities
+│   ├── preprocessors.py# Data preprocessing
+│   └── recommenders.py # Recommendation engine
+├── .env                # Environment variables
+└── requirements.txt    # Project dependencies
+```
+
 
 ### 1. **Configuration (`config.py`):**
 Contains all configurable settings for the recommendation system, such as API base URL, endpoints, token management, and system settings like pagination size and the number of recommendations.
@@ -12,7 +65,7 @@ Contains all configurable settings for the recommendation system, such as API ba
 - **Key Settings:**
   - `API_BASE_URL`: The base URL for the backend API.
   - `API_TOKEN`: Token for API authentication, loaded from environment variables.
-  - `ENDPOINTS`: Contains all API endpoints (e.g., for posts, views, likes, ratings, and users).
+  - `ENDPOINTS`: Contains all API endpoints (for posts, views, likes, ratings, and users).
   - `TOP_N_RECOMMENDATIONS`: Number of recommendations returned.
 
 ### 2. **API Helpers (`api_helpers.py`):**
@@ -40,7 +93,19 @@ Implements the core recommendation logic using a hybrid approach:
   - `_prepare_content_similarity`: Prepares the TF-IDF similarity matrix.
   - `_prepare_collaborative_model`: Prepares the matrix factorization model.
   - `get_recommendations`: Generates personalized recommendations based on username, category, and mood.
-  - `evaluate`: Computes evaluation metrics (e.g., MAE, RMSE).
+  - `evaluate`: Computes evaluation metrics ( MAE, RMSE).
+
+## Performance Evaluation
+
+The `evaluate()` method in the recommendation engine calculates:
+- Mean Absolute Error (MAE)
+- Root Mean Square Error (RMSE)
+
+Lower values indicate better recommendation accuracy.
+
+## Environment Variables
+
+- `FLIC_TOKEN`: API authentication token (required)
 
 ### 5. **Flask App (`app.py`):**
 Provides a REST API to expose the recommendation system.
@@ -81,13 +146,6 @@ The API returns a JSON response with recommended post IDs based on the given par
 ---
 
 ## Metrics Evaluation
-
-### Missing Functionality:
-Currently, the code does not provide a way to:
-1. Save the processed DataFrame to a CSV file.
-2. View or save evaluation metrics (MAE, RMSE).
-
-This functionality will be implemented separately.
 
 ### How Evaluation Works:
 - **Inputs:** The ground truth (user-post ratings) for comparison.
