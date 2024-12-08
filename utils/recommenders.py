@@ -93,9 +93,10 @@ class RecommendationEngine:
         username: str,
         category_id: Optional[int] = None,
         mood: Optional[str] = None,
+        calculate_metrics: bool = False,
     ) -> List[int]:
         """
-        Generate personalized recommendations.
+        Generate personalized recommendations with optional metrics calculation.
 
         Args:
             username (str): User identifier.
@@ -133,6 +134,12 @@ class RecommendationEngine:
             .head(Config.TOP_N_RECOMMENDATIONS)
             .index.tolist()
         )
+
+        if calculate_metrics:
+            current_metrics = self.evaluate()
+            print(f"Metrics for recommendation to {username}:")
+            print(f"MAE: {current_metrics['MAE']}")
+            print(f"RMSE: {current_metrics['RMSE']}")
 
         return recommendations
 

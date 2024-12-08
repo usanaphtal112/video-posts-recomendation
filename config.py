@@ -25,5 +25,5 @@ class Config:
     PAGE_SIZE = 1000
     MAX_PAGES = 5
 
-    # Recommendation settings
+    # Number of Recommendation settings
     TOP_N_RECOMMENDATIONS = 10

@@ -28,7 +28,8 @@ cd video-posts-recomendation
 2. Create a virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+source venv/bin/activate  
+venv\Scripts\activate (For Window user)
 ```
 
 3. Install dependencies:

@@ -25,8 +25,8 @@ class APIClient:
 
         combined_data = []
         page = 1
-        total_pages = float("inf")  # Default to infinite pages
-        max_pages_to_fetch = 1000  # Safeguard against unlimited pagination
+        total_pages = float("inf")
+        max_pages_to_fetch = 1000
 
         while page <= min(max_pages_to_fetch, total_pages):
             current_params = params.copy()
@@ -72,7 +72,7 @@ class APIClient:
 
                 page += 1
 
-                # Optional: Log progress for large data fetches
+                # Log progress for large data fetches
                 if page % 10 == 0:
                     self.logger.info(
                         f"Fetched {len(combined_data)} items so far from {endpoint}"
